@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Photo Gallery</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="image">
+    Hover over an image below to display here.
+  </div>
+
+  <div id="gallery">
+    <img src="https://via.placeholder.com/150/ff7f7f" 
+         alt="Red placeholder image"
+         onmouseover="upDate(this)" 
+         onmouseout="undo()">
+
+    <img src="https://via.placeholder.com/150/7fbfff" 
+         alt="Blue placeholder image"
+         onmouseover="upDate(this)" 
+         onmouseout="undo()">
+
+    <img src="https://via.placeholder.com/150/7fff7f" 
+         alt="Green placeholder image"
+         onmouseover="upDate(this)" 
+         onmouseout="undo()">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+  <script function upDate(previewPic) {
+  console.log("Mouse over event triggered!");
+  console.log("Image source:", previewPic.src);
+  console.log("Alt text:", previewPic.alt);
+
+
+  const imageDiv = document.getElementById("image");
+  imageDiv.style.backgroundImage = url('${previewPic.src}');
+  imageDiv.textContent = previewPic.alt;
+}
+function undo() {
+  console.log("Mouse out event triggered!");
+
+  const imageDiv = document.getElementById("image");
+
+  // Reset the background image and text
+  imageDiv.style.backgroundImage = "url('')";
+  imageDiv.textContent = "Hover over an image below to display here.";
+}</script>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+#image {
+  width: 400px;
+  height: 300px;
+  line-height: 300px;
+  margin: 20px auto;
+  border: 2px solid #ccc;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px black;
+}
+
+#gallery img {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border: 2px solid transparent;
+  transition: border 0.3s;
+}
+
+#gallery img:hover {
+  border: 2px solid #333;
+  cursor: pointer;
+}
