@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Photo Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .gallery img {
+      width: 250px;
+      height: 160px;
+      border: 3px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .gallery img:focus {
+      outline: none;
+      border-color: #0078d7;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body onload="initializeGallery()">
+  <h1>Interactive Photo Gallery</h1>
+
+  <div class="gallery" id="photoGallery">
+    <img src="https://picsum.photos/id/1015/250/160" alt="Mountain landscape with a river" />
+    <img src="https://picsum.photos/id/1025/250/160" alt="Golden retriever dog looking up" />
+    <img src="https://picsum.photos/id/1035/250/160" alt="Forest with sunlight filtering through trees" />
+    <img src="https://picsum.photos/id/1045/250/160" alt="Ocean waves hitting rocks at sunset" />
+    <img src="https://picsum.photos/id/1055/250/160" alt="City skyline at night with reflections" />
+    <img src="https://picsum.photos/id/1065/250/160" alt="Field of tulips under a blue sky" />
+  </div>
+
+  <script>
+    // Function runs when page loads
+    function initializeGallery() {
+      console.log("Page loaded – initializing gallery...");
+
+      const images = document.querySelectorAll(".gallery img");
+
+      // Loop through each image and add events
+      for (let i = 0; i < images.length; i++) {
+        const img = images[i];
+
+        // Add tabindex for keyboard navigation
+        img.setAttribute("tabindex", "0");
+
+        // Mouse events
+        img.addEventListener("mouseover", highlightImage);
+        img.addEventListener("mouseleave", resetImage);
+
+        // Keyboard focus events
+        img.addEventListener("focus", highlightImage);
+        img.addEventListener("blur", resetImage);
+      }
+    }
+
+    // Event handlers
+    function highlightImage(event) {
+      console.log("Highlight triggered on:", event.target.alt);
+      event.target.style.borderColor = "#0078d7";
+      event.target.style.transform = "scale(1.05)";
+    }
+
+    function resetImage(event) {
+      console.log("Reset triggered on:", event.target.alt);
+      event.target.style.borderColor = "transparent";
+      event.target.style.transform = "scale(1)";
+    }
+  </script>
+</body>
+</html>
